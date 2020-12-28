@@ -6,6 +6,7 @@ from __future__ import print_function
 import sys
 from random import random
 from operator import add
+from sparkdl import KerasTransformer
 from pyspark.sql import SparkSession
 
 def main():
@@ -20,15 +21,17 @@ def main():
     model = NeuralModel("./model_bilstm.tflite")
 
     # Format data
-    #input_data = model.input_data(data_raw)
+    input_data = model.input_data(data_raw)
 
     # print("Output details:", model.get_details()[1])
 
     # Run the model with input data
-    output=spark.read.csv(data_path).rdd.map(lambda i:model.input_data(i)).parallelize(range(1, 2), 1).map(lambda m:model.run(m)) #problem: where to place inputdata(m)
+    transformer = KerasTransformer(inputCol="features", outputCol="predictions", modelFile=model)
+    final_df = transformer.transform(input_data)
+    #output=spark.read.csv(data_path).rdd.map(lambda i:model.input_data(i)).parallelize(range(1, 2), 1).map(lambda m:model.run(m)) #problem: where to place inputdata(m)
     #output = model.run(input_data)
     print("*********\nOutput =\n")
-    print(output)
+    print(final_df)
 
 
 
