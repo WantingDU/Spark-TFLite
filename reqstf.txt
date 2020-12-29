@@ -1,4 +1,3 @@
-matplotlib
 numpy
 pandas
 https://github.com/google-coral/pycoral/releases/download/release-frogfish/pycoral-1.0.0-cp35-cp35m-linux_armv7l.whl
