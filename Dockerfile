@@ -16,5 +16,13 @@
  COPY runDriver.sh .
  RUN chmod 777 /runDriver.sh
 
+# install git 
+
+# install git 
+RUN apt-get update && \ 
+apt-get upgrade -y && \ 
+apt-get install -y git
+
+
  RUN git clone https://github.com/WantingDU/Spark-TFLite
  RUN pip3 install --requirement /Spark-TFLite/reqstf.txt
