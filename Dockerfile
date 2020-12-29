@@ -16,8 +16,8 @@
 
  #RUN git clone https://github.com/WantingDU/Spark-TFLite
  #RUN pip3 install --requirement /Spark-TFLite/reqstf.txt
- RUN apt-get install -y python3-numpy
- RUN pip3 install pandas
+ RUN pip3 install numpy 
+ RUN pip3 install pandas  
  RUN pip3 install tflite
  
  # install spark
@@ -32,3 +32,5 @@
  RUN chmod 777 /runMaster.sh
  COPY runDriver.sh .
  RUN chmod 777 /runDriver.sh
+
+ RUN apt-get update apt-get install vim
