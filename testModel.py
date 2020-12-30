@@ -4,7 +4,6 @@ from NeuralLibrary import NeuralModel
 import numpy as np
 import pandas as pd
 
-from __future__ import print_function
 import sys
 from random import random
 from operator import add
@@ -15,11 +14,11 @@ def main():
         .builder\
         .appName("PredictTemperature")\
         .getOrCreate()
-    data_path="./Datasets/Jena/jena_weather_dataset_roof.csv"
+    data_path="/Spark-TFLite/jena_weather_dataset_roof.csv"
     #data_raw = data_from_file(data_path)
     
     # Specify which model to use
-    model = NeuralModel("./model_bilstm.tflite")
+    model = NeuralModel("/Spark-TFLite/model_bilstm.tflite")
 
     # Format data
     #input_data = model.input_data(data_raw)
