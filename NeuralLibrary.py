@@ -2,8 +2,7 @@
 # coding=utf-8
 
 import datetime
-import tensorflow as tf
-#import tflite_runtime.interpreter as tflite
+import tflite_runtime.interpreter as tflite
 import numpy as np
 import pandas as pd
 
@@ -11,7 +10,7 @@ import pandas as pd
 class NeuralModel():
     def __init__(self, model_path):
         # Load the TFLite model and allocate tensors.
-        self.interpreter = tf.lite.Interpreter(model_path)
+        self.interpreter = tflite.Interpreter(model_path)
         self.interpreter.allocate_tensors()
 
         # Get input and output tensors.
@@ -20,8 +19,8 @@ class NeuralModel():
         self.input_shape = self.input_details[0]['shape']
         self.output_shape = self.output_details[0]['shape']
 
-        self.tmean = pd.read_csv('Datasets/train_mean.csv')
-        self.tstd = pd.read_csv('Datasets/train_std.csv')
+        self.tmean = pd.read_csv('/Spark-TFLite/train_mean.csv')
+        self.tstd = pd.read_csv('/Spark-TFLite/train_std.csv')
         self.tmean = self.tmean.iloc[0] #permet de récupérer l'objet sous forme de série 
         self.tstd = self.tstd.iloc[0]
 
