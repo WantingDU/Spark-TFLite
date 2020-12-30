@@ -9,7 +9,7 @@
  COPY --from=arm32v7/python:3.7 / /
  RUN pip3 install numpy pandas
  # install tflite-runtime for armv7
- RUN pip3 install https://github.com/iCorv/tflite-runtime/raw/master/tflite_runtime-2.4.0-cp37-cp37m-linux_armv7l.whl
+ RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
 
  # install spark
  RUN wget https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz
