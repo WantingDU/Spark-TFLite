@@ -1,4 +1,4 @@
- FROM arm32v7/python:3.7
+ FROM arm32v7/openjdk:8
 
  RUN apt-get update && apt-get install -y wget
  RUN apt-get update && apt-get install -y tar
@@ -6,13 +6,12 @@
  RUN apt-get update && apt-get install -y vim
 
  #install python3 packages
- RUN wget -P /etc/ https://github.com/WantingDU/Spark-TFLite/raw/main/pip.conf
- RUN pip3 install numpy pandas
+ RUN pip3 install numpy pandas --extra-index-url https://www.piwheels.org/simple
  # install tflite-runtime for armv7
  RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
 
  # install Spark
- COPY --from=arm32v7/openjdk:8-slim / /
+ COPY --from=arm32v7/python:3.7 / /
  RUN wget https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz
  RUN tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz
  RUN mv spark-2.4.7-bin-hadoop2.7 /spark
