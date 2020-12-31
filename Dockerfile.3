@@ -18,13 +18,13 @@
  # Set PYTHONPATH
  ENV PYTHONPATH  /spark/python:/spark/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH
 
- COPY runWorker.sh .
- RUN chmod 777 /runWorker.sh
- COPY runMaster.sh .
- RUN chmod 777 /runMaster.sh
- COPY runDriver.sh .
- RUN chmod 777 /runDriver.sh
-
+ #COPY runWorker.sh .
+ #RUN chmod 777 /runWorker.sh
+ #COPY runMaster.sh .
+ #RUN chmod 777 /runMaster.sh
+ #COPY runDriver.sh .
+ #RUN chmod 777 /runDriver.sh
+ 
  # Downloading scripts
  RUN wget https://github.com/WantingDU/Spark-TFLite/tarball/main
  RUN mkdir Spark-TFLite
