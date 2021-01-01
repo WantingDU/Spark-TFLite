@@ -14,13 +14,13 @@
 
  # Install Spark
  RUN wget https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz
- RUN tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz && mv spark-2.4.7-bin-hadoop2.7 /spark
+ RUN tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz --strip 1 -C /spark && rm -f spark-2.4.7-bin-hadoop2.7.tgz
  # Set PYTHONPATH
  ENV PYTHONPATH /spark/python:/spark/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH
 
  # Downloading scripts
  RUN wget https://github.com/WantingDU/Spark-TFLite/tarball/main
- RUN mkdir Spark-TFLite && tar -xf main --strip 1 -C Spark-TFLite
+ RUN mkdir /Spark-TFLite && tar -xf main --strip 1 -C /Spark-TFLite
  
  RUN mv /Spark-TFLite/*.sh /
  RUN chmod 777 /runWorker.sh && chmod 777 /runMaster.sh && chmod 777 /runDriver.sh
