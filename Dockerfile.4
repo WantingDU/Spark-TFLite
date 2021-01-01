@@ -14,7 +14,7 @@
 
  # Install Spark
  RUN wget https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz
- RUN mkdir /spark && tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz --strip 1 -C /spark && rm -f spark-2.4.7-bin-hadoop2.7.tgz
+ RUN mkdir /spark && tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz --strip 1 -C /spark
  # Set PYTHONPATH
  ENV PYTHONPATH /spark/python:/spark/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH
 
