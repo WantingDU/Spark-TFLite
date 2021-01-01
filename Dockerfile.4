@@ -1,9 +1,7 @@
  FROM arm32v7/openjdk:8
 
- RUN apt-get update && apt-get install -y wget
- RUN apt-get update && apt-get install -y tar
- RUN apt-get update && apt-get install -y bash
- RUN apt-get update && apt-get install -y vim
+ RUN apt-get update && apt-get install -y wget tar
+ RUN apt-get update && apt-get install -y bash vim
 
  # Install python3
  COPY --from=arm32v7/python:3.7-slim-buster / /
@@ -12,22 +10,17 @@
  RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
  
  # Install shared dependencies
- RUN apt-get update && apt-get install -y libblas3 liblapack3 liblapack-dev libblas-dev
- RUN apt-get update && apt-get install -y libatlas-base-dev
+ RUN apt-get update && apt-get install -y libblas3 liblapack3 liblapack-dev libblas-dev libatlas-base-dev
 
  # Install Spark
  RUN wget https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz
- RUN tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz
- RUN mv spark-2.4.7-bin-hadoop2.7 /spark
+ RUN tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz && mv spark-2.4.7-bin-hadoop2.7 /spark
  # Set PYTHONPATH
  ENV PYTHONPATH /spark/python:/spark/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH
 
  # Downloading scripts
  RUN wget https://github.com/WantingDU/Spark-TFLite/tarball/main
- RUN mkdir Spark-TFLite
- RUN tar -xf main --strip 1 -C Spark-TFLite
+ RUN mkdir Spark-TFLite && tar -xf main --strip 1 -C Spark-TFLite
  
  RUN mv /Spark-TFLite/*.sh /
- RUN chmod 777 /runWorker.sh
- RUN chmod 777 /runMaster.sh
- RUN chmod 777 /runDriver.sh
+ RUN chmod 777 /runWorker.sh && chmod 777 /runMaster.sh && chmod 777 /runDriver.sh
