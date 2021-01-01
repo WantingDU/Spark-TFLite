@@ -28,7 +28,7 @@ def main():
     # print("Output details:", model.get_details()[1])
 
     # Run the model with input data
-    output=spark.read.csv(data_path).rdd.map(lambda r: r[0]).flatMap(lambda x:x.split('')).map(lambda i:model.input_data(i[0])).map(lambda m:model.run(m)) #problem: where to place inputdata(m)
+    output=spark.read.csv(data_path).rdd.map(lambda r: r[0]).flatMap(lambda x:x.split('')).map(lambda i: NeuralModel("/Spark-TFLite/model_bilstm.tflite").input_data(i[0])).map(lambda m: NeuralModel("/Spark-TFLite/model_bilstm.tflite").run(m)) #problem: where to place inputdata(m)
     #output = model.run(input_data)
     print("*********\nOutput =\n")
     print(output)
