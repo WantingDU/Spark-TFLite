@@ -12,8 +12,8 @@
  RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
  
  # Install shared dependencies
- RUN apt-get update && apt-get install libblas3 liblapack3 liblapack-dev libblas-dev
- RUN apt-get update && apt-get install libatlas-base-dev
+ RUN apt-get update && apt-get install -y libblas3 liblapack3 liblapack-dev libblas-dev
+ RUN apt-get update && apt-get install -y libatlas-base-dev
 
  # Install Spark
  RUN wget https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz
