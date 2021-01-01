@@ -5,10 +5,10 @@ import numpy as np
 import pandas as pd
 
 def main():
-    data_raw = data_from_file("./Datasets/Jena/jena_weather_dataset_roof.csv")
+    data_raw = data_from_file("/Spark-TFLite/jena_weather_dataset_roof.csv")
     
     # Specify which model to use
-    model = NeuralModel("./model_bilstm.tflite")
+    model = NeuralModel("/Spark-TFLite/model_bilstm.tflite")
 
     # Format data
     input_data = model.input_data(data_raw)
