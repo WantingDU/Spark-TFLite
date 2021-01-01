@@ -5,29 +5,29 @@
  RUN apt-get update && apt-get install -y bash
  RUN apt-get update && apt-get install -y vim
 
- #install python3
+ # Install python3
  COPY --from=arm32v7/python:3.7 / /
  RUN pip3 install numpy pandas --extra-index-url https://www.piwheels.org/simple
  # install tflite-runtime for armv7
  RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
+ 
+ # Install shared dependencies
+ RUN apt-get update && apt-get install libblas3 liblapack3 liblapack-dev libblas-dev
+ RUN apt-get update && apt-get install libatlas-base-dev
 
- # install Spark
+ # Install Spark
  RUN wget https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz
  RUN tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz
  RUN mv spark-2.4.7-bin-hadoop2.7 /spark
  # Set PYTHONPATH
  ENV PYTHONPATH /spark/python:/spark/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH
 
- COPY runWorker.sh .
- RUN chmod 777 /runWorker.sh
- COPY runMaster.sh .
- RUN chmod 777 /runMaster.sh
- COPY runDriver.sh .
- RUN chmod 777 /runDriver.sh
-
  # Downloading scripts
  RUN wget https://github.com/WantingDU/Spark-TFLite/tarball/main
  RUN mkdir Spark-TFLite
  RUN tar -xf main --strip 1 -C Spark-TFLite
  
-
+ RUN mv /Spark-TFLite/*.sh /
+ RUN chmod 777 /runWorker.sh
+ RUN chmod 777 /runMaster.sh
+ RUN chmod 777 /runDriver.sh
