@@ -6,7 +6,7 @@
  RUN apt-get update && apt-get install -y vim
 
  # Install python3
- COPY --from=arm32v7/python:3.7 / /
+ COPY --from=arm32v7/python:3.7-slim-buster / /
  RUN pip3 install numpy pandas --extra-index-url https://www.piwheels.org/simple
  # install tflite-runtime for armv7
  RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
