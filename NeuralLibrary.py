@@ -81,9 +81,7 @@ class NeuralModel():
     def output_data(self, data):
         out = []
         for item in data:
-            print(self.tstd.keys())
-            # TODO this is a VERY ugly workaround to use .keys()[1] to get temp but due to how pandas writes keys I couldn't find better
-            out.append(item * float(self.tstd.keys()[1]) + float(self.tmean.keys()[1]))
+            out.append(item * float(self.tstd[0]) + float(self.tmean[0]))
         return out
 
 
