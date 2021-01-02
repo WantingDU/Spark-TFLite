@@ -29,7 +29,7 @@ def main():
     # print("Output details:", model.get_details()[1])
 
     # Run the model with input data
-        spark.conf.set("spark.sql.execution.arrow.enabled", "true")
+    spark.conf.set("spark.sql.execution.arrow.enabled", "true")
     print("000000000000000000000000")
     #df = spark.read.csv(data_path).select('*').toPandas()
     df = pd.read_csv(data_path)
