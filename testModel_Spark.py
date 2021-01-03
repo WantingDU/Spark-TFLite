@@ -25,16 +25,17 @@ def main():
 
 
     # Run the model with input data
-    spark.conf.set("spark.sql.execution.arrow.enabled", "true")
+
     df = pd.read_csv(data_path)
     df_rdd = spark.sparkContext.parallelize([df])
     input_rdd = df_rdd.map(lambda i: NeuralModel("/Spark-TFLite/model_bilstm.tflite").input_data(i))
     output_rdd = input_rdd.map(lambda m: NeuralModel("/Spark-TFLite/model_bilstm.tflite").run(m))
     output = output_rdd.collect()
-    for x in output:
-        print(x[0])
+   
 
     print("***********************\nOutput =\n")
+     for x in output:
+        print(x[0])
 
 
 
