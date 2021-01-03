@@ -13,19 +13,16 @@ from pyspark.sql import SparkSession
 
     
 def main():
+    #Create a spark session
     spark = SparkSession\
         .builder\
         .appName("PredictTemperature")\
         .getOrCreate()
-    data_path="/Spark-TFLite/jena_weather_dataset_roof.csv"
-
     
     # Specify which model to use
-    model = NeuralModel("/Spark-TFLite/model_bilstm.tflite")
+    data_path="/Spark-TFLite/jena_weather_dataset_roof.csv"
 
-
-    # Run the model with input data
-
+    # Run the model in spark session with input data
     df = pd.read_csv(data_path)
     df_rdd = spark.sparkContext.parallelize([df])
     input_rdd = df_rdd.map(lambda i: NeuralModel("/Spark-TFLite/model_bilstm.tflite").input_data(i))
@@ -34,7 +31,7 @@ def main():
    
 
     print("***********************\nOutput =\n")
-     for x in output:
+    for x in output:
         print(x[0])
 
 
